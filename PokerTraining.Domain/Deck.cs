@@ -9,15 +9,7 @@ namespace PokerTraining.Domain
     {
         public Deck()
         {
-            var cards = new List<Card>();
-            foreach (var suit in Enum.GetValues(typeof(SuitEnum)))
-            {
-                foreach (ValueEnum value in Enum.GetValues(typeof(ValueEnum)))
-                {
-                    cards.Add(new Card((SuitEnum)suit, value));
-                }
-            }
-            Cards = cards;
+            Reset();
         }
 
         public void Shuffle()
@@ -26,5 +18,18 @@ namespace PokerTraining.Domain
         }
 
         public List<Card> Cards { get; private set; }
+
+        public void Reset()
+        {
+            var cards = new List<Card>();
+            foreach (var suit in Enum.GetValues(typeof(SuitEnum)))
+            {
+                foreach (RankEnum value in Enum.GetValues(typeof(RankEnum)))
+                {
+                    cards.Add(new Card((SuitEnum)suit, value));
+                }
+            }
+            Cards = cards;
+        }
     }
 }

@@ -49,7 +49,7 @@
     <Compile Include="Deck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SuitEnum.cs" />
-    <Compile Include="ValueEnum.cs" />
+    <Compile Include="RankEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

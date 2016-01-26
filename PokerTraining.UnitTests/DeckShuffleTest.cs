@@ -13,26 +13,39 @@ namespace PokerTraining.UnitTests
     [TestFixture]
     public class DeckShuffleTest
     {
-        [Test]
-        public void deck_after_Shuffle_has_52_card_unordered()
+        private List<Card> _cards;
+        private Deck _deck;
+
+        [TestFixtureSetUp]
+        public void Init()
         {
+            _deck = new Deck();
+            _deck.Reset();
+            _cards = _deck.Cards;
+        }
 
-            var deck = new Deck();
+        [Test]
+        public void a_deck_has_52_cards()
+        {
+            _cards.Should().Have.Count.EqualTo(52);
 
-            var cards = deck.Cards;
-            cards.Should().Have.Count.EqualTo(52);
+            _cards.FirstOrDefault().Rank.Should().Be.EqualTo(RankEnum.Ace);
+            _cards.FirstOrDefault().Suit.Should().Be.EqualTo(SuitEnum.Hearts);
+            _cards.FirstOrDefault().Value.Should().Be.EqualTo(new Value(SuitEnum.Hearts, RankEnum.Ace));
 
-            cards.FirstOrDefault().Value.Should().Be.EqualTo(ValueEnum.Ace);
-            cards.FirstOrDefault().Suit.Should().Be.EqualTo(SuitEnum.Hearts);
+            _cards.LastOrDefault().Rank.Should().Be.EqualTo(RankEnum.King);
+            _cards.LastOrDefault().Suit.Should().Be.EqualTo(SuitEnum.Clubs);
+            _cards.LastOrDefault().Value.Should().Be.EqualTo(new Value(SuitEnum.Clubs, RankEnum.King));
+        }
 
-            cards.LastOrDefault().Value.Should().Be.EqualTo(ValueEnum.King);
-            cards.LastOrDefault().Suit.Should().Be.EqualTo(SuitEnum.Clubs);
+        [Test]
+        public void b_deck_after_Shuffle_has_52_card_unordered()
+        {
+            _deck.Shuffle();
+            _cards = _deck.Cards;
 
-            deck.Shuffle();
-
-            cards.FirstOrDefault().Value.Should().Not.Be.EqualTo(ValueEnum.Ace);
-            cards.LastOrDefault().Value.Should().Not.Be.EqualTo(ValueEnum.King);
-
+            _cards.FirstOrDefault().Value.Should().Not.Be.EqualTo( new Value(SuitEnum.Hearts, RankEnum.Ace));
+            _cards.LastOrDefault().Value.Should().Not.Be.EqualTo(new Value(SuitEnum.Clubs, RankEnum.King));
         }
 
     }

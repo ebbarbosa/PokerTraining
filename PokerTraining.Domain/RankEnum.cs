@@ -1,6 +1,6 @@
 namespace PokerTraining.Domain
 {
-    public enum ValueEnum
+    public enum RankEnum
     {
         Ace = 1,
         Two,
